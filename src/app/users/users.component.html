@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                {{pageTitle}}
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">filter by</div>
+                    <div class="col-md-6"><input type="text" class="text" /></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>filter by :</h5>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table" *ngIf="users">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>email</th>
+                            <th>phone</th>
+                            <th>country</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of users">
+                            <td>{{user.name}}</td>
+                            <td>{{user.phone}}</td>
+                            <td>{{user.name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
