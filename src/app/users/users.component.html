@@ -7,12 +7,17 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-2">filter by</div>
-                    <div class="col-md-6"><input type="text" class="text" /></div>
+                    <div class="col-md-6">
+                        <input [(ngModel)]="listFilter" type="text" class="text" />
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <h5>filter by :</h5>
+                </div>
+                <div class="col-md-6">
+                    <button (click)="showPhone()" class="btn">{{showPhoneVisible ? 'hide' : 'show'}} Phone</button>
                 </div>
             </div>
             <div class="table-responsive">
@@ -26,10 +31,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of users">
+                        <tr *ngFor="let user of filteredUsers">
                             <td>{{user.name}}</td>
-                            <td>{{user.phone}}</td>
-                            <td>{{user.name}}</td>
+                            <td>{{user.email}}</td>
+                            <td *ngIf="showPhoneVisible">{{user.phone}}</td>
+                            <td>{{user.country}}</td>
                         </tr>
                     </tbody>
                 </table>
