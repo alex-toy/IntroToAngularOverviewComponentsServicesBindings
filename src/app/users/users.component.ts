@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '../models/user';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
-})
+})  
 export class UsersComponent implements OnInit{
   pageTitle : string = "user list";
   filteredUsers : IUser[] = [];
-  users : IUser[] = [
-    {id:1, name:"alex", email: 'alex@test.fr', phone:1234, country: 'lebanon'},
-    {id:2, name:"seb", email: 'seb@test.fr', phone:9876, country: 'france'},
-    {id:3, name:"kate", email: 'kate@test.fr', phone:4257, country: 'spain'},
-  ];
+  users : IUser[] = [];
   showPhoneVisible : boolean = false;
   private _listFilter: string = "";
   public get listFilter(): string {
@@ -24,15 +21,31 @@ export class UsersComponent implements OnInit{
     this.getFilteredUsers();
   }
 
+  constructor(private userService: UserService) {  }
+
   showPhone() : void{
     this.showPhoneVisible = !this.showPhoneVisible;
   }
 
   getFilteredUsers() {
-    this.filteredUsers = this.users.filter(u => u.name.includes(this.listFilter));
+    if (this.listFilter !== ""){
+      this.filteredUsers = this.users.filter(u => u.name.includes(this.listFilter));
+    } else {
+      this.filteredUsers = this.users;
+    }
+  }
+
+  onStarClicked(rating: string) : void{
+    this.pageTitle = "rating clicked " + rating;
   }
   
   ngOnInit(): void {
-    console.log("ngOnInit")
+    this.userService.getUsers().subscribe({
+      next: users => {
+        this.users = users;
+        this.filteredUsers = this.users;
+      },
+      error: error => console.log(error)
+    });
   }
 }

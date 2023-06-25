@@ -25,17 +25,24 @@
                     <thead>
                         <tr>
                             <th>name</th>
+                            <th>country</th>
+                            <th>rating</th>
                             <th>email</th>
                             <th>phone</th>
-                            <th>country</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let user of filteredUsers">
                             <td>{{user.name}}</td>
+                            <td>{{user.country}}</td>
+                            <td>
+                                <star 
+                                    [rating]="user.rating"
+                                    (starClicked)="onStarClicked($event)"
+                                ></star>
+                            </td>
                             <td>{{user.email}}</td>
                             <td *ngIf="showPhoneVisible">{{user.phone}}</td>
-                            <td>{{user.country}}</td>
                         </tr>
                     </tbody>
                 </table>

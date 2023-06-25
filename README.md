@@ -12,11 +12,3 @@
 Install boostrap :
 npm i boostrap
 
-
-## Create Function App
-
-### Demo Function App 1
-
-- create function app
-<img src="/pictures/create_fa.png" title="create function app"  width="600">
-
